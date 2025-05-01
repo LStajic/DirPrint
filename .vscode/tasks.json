@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // ▼▼▼ YOUR EXISTING BUILD TASK ▼▼▼
+        {
+            "label": "Build with CMake",
+            "type": "shell",
+            "command": "cmake --build build",
+            "group": "build",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        // ▼▼▼ NEW RUN TASK ▼▼▼ (ADD THIS COMMA-SEPARATED ENTRY)
+        {
+            "label": "Run Program",
+            "type": "shell",
+            "command": "./build/my_app",
+            "group": "test",
+            "dependsOn": "Build with CMake"
+        }
+    ]
+}

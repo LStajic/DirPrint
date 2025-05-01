@@ -1,0 +1,7 @@
+CompileFlags:
+  Add: 
+    - "-I${workspaceFolder}/h"
+    - "--std=c++17"
+Diagnostics:
+  ClangTidy:
+    Checks: '*'
