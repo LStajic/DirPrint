@@ -1,7 +1,6 @@
 {
     "version": "2.0.0",
     "tasks": [
-        // ▼▼▼ YOUR EXISTING BUILD TASK ▼▼▼
         {
             "label": "Build with CMake",
             "type": "shell",
@@ -20,7 +19,6 @@
                 }
             }
         },
-        // ▼▼▼ NEW RUN TASK ▼▼▼ (ADD THIS COMMA-SEPARATED ENTRY)
         {
             "label": "Run Program",
             "type": "shell",

@@ -12,4 +12,3 @@ int main(){
     return 0;
 }
 
-//vrati .vscode, resi probleme sa ekstenzijama

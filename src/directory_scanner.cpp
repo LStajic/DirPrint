@@ -18,7 +18,7 @@ void directory_scanner::scan(const fs::path& root){
 
 //Iterate through directories
 void directory_scanner::process_directory(const fs::path& path){
-    int depth = 0;
+    int parent_depth = -1;
     try {
         std::ofstream out_file("output");
         
@@ -31,9 +31,7 @@ void directory_scanner::process_directory(const fs::path& path){
             if(entry.is_symlink()) continue;
     
             //TYPE LOGIC GOES HERE
-    
             out_file << entry.path().filename().string() << "\n";
-            std::cout << it.depth();
         }
         
     }

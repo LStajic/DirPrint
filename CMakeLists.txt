@@ -4,13 +4,11 @@ project(MyProject)
 find_package(SQLiteCpp REQUIRED)
 find_package(SQLite3 REQUIRED)
 
-# ▼▼▼ MUST SET THIS TO SEE HEADERS ▼▼▼
 include_directories(
     ${PROJECT_SOURCE_DIR}/h
     ${SQLiteCpp_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
 )
-# ▼▼▼ List all source files here ▼▼▼
 add_executable(my_app
     src/main.cpp
     src/directory_scanner.cpp
