@@ -1,3 +1,0 @@
-/home/lukas/Random/vscodenew/build/CMakeFiles/my_app.dir
-/home/lukas/Random/vscodenew/build/CMakeFiles/edit_cache.dir
-/home/lukas/Random/vscodenew/build/CMakeFiles/rebuild_cache.dir

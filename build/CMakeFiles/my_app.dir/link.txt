@@ -1,1 +1,0 @@
-clang++ -Wl,--dependency-file=CMakeFiles/my_app.dir/link.d CMakeFiles/my_app.dir/src/main.cpp.o CMakeFiles/my_app.dir/src/directory_scanner.cpp.o -o my_app  /usr/local/lib/libSQLiteCpp.a /usr/local/lib/libsqlite3.a -ldl
