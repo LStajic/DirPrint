@@ -12,6 +12,7 @@ include_directories(
 add_executable(my_app
     src/main.cpp
     src/directory_scanner.cpp
+    src/database_handler.cpp
 )
 
 target_link_libraries(my_app

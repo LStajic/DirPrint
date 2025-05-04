@@ -1,7 +1,7 @@
 #pragma once
 #ifndef SQL_CONFIG_H
 #define SQL_CONFIG_H
-#include <vector>
+#include <unordered_map>
 #include <string>
 #include <array>
 
@@ -22,12 +22,13 @@ const std::array<std::string, 3> STRING_QUERY_ARR = {
 };
 
 //Comand name - Command pairs
-const std::vector<std::pair<std::string, std::string>> SQL_COMMANDS = {
-    {"get_user",R"(
-            INSERT INTO lokalitet (godina, ime)
-            VALUES (?, ?)
+const std::unordered_map<std::string, std::string> SQL_COMMANDS = {
+    {"get_id_lokalitet",R"(
+            SELECT id FROM lokalitet
         )"},
-    {"add_user",    "INSERT INTO users VALUES (?, ?, ?);"},
+    {"get_id_blizi_lokalitet",R"(
+            SELECT id FROM blizi_lokalitet
+        )"},
     {"delete_user", "DELETE FROM users WHERE id = ?;"},
 };
 #endif
