@@ -1,5 +1,6 @@
 #include "../h/database_handler.h"
 #include "../h/sql_config.h"
+#include <iostream>
 
 database_handler::database_handler(std::filesystem::path& path) : m_db(path.string(), SQLite::OPEN_READWRITE){}
 
@@ -7,29 +8,38 @@ database_handler::database_handler(std::filesystem::path& path) : m_db(path.stri
 void database_handler::run_insert(const int& curr_depth,const int& parent_id, const std::string& inserted_value){
     //optimized!
     SQLite::Statement query(m_db,STRING_QUERY_ARR[curr_depth]);
-    switch (curr_depth) {
-    case 0: {
-        query.bind(1, inserted_value.substr(0,4));
-        query.bind(2,inserted_value.substr(3));
-        break;
-    }
-    case 1: {
-        query.bind(1, parent_id);
-        query.bind(2,inserted_value.substr(0,4));
-        query.bind(3,inserted_value.substr(4,3));
-        query.bind(4,inserted_value.substr(7,1));
-        query.bind(5,inserted_value.substr(8,3));
-        break;
-    }
-    case 2: {
-        query.bind(1, parent_id);
-        query.bind(2,inserted_value.substr(0,2));
-        query.bind(3,inserted_value.substr(2,4));
-        query.bind(4,inserted_value.substr(6,3));
-        query.bind(5,inserted_value.substr(9,1));
-        break;
-    }
-    }
+        switch (curr_depth) {
+            case 0: {
+                if(inserted_value.length() != 6){
+                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                }
+                query.bind(1, inserted_value.substr(0,4));
+                query.bind(2,inserted_value.substr(3));
+                break;
+            }
+            case 1: {
+                if(inserted_value.length() != 11){
+                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                }
+                query.bind(1, parent_id);
+                query.bind(2,inserted_value.substr(0,4));
+                query.bind(3,inserted_value.substr(4,3));
+                query.bind(4,inserted_value.substr(7,1));
+                query.bind(5,inserted_value.substr(8,3));
+                break;
+            }
+            case 2: {
+                if(inserted_value.length() != 10){
+                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                }
+                query.bind(1, parent_id);
+                query.bind(2,inserted_value.substr(0,2));
+                query.bind(3,inserted_value.substr(2,4));
+                query.bind(4,inserted_value.substr(6,3));
+                query.bind(5,inserted_value.substr(9,1));
+                break;
+            }
+        }
     query.exec();
 }
 
