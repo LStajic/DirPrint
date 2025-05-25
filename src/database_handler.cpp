@@ -3,41 +3,44 @@
 #include <iostream>
 
 database_handler::database_handler(std::filesystem::path& path) : m_db(path.string(), SQLite::OPEN_READWRITE){}
-
-//Method that takes the current depth and the name of the directory to insert values depending on the depth
-void database_handler::run_insert(const int& curr_depth,const int& parent_id, const std::string& inserted_value){
-    //optimized!
+//Metod koji uzima trenutni depth i ime direktorijuma da unese podatke koji su zavisni od dubine
+void database_handler::run_insert_directory(const int& curr_depth,const int& parent_id, const std::string& inserted_value){
+    //optimizovano!
     SQLite::Statement query(m_db,STRING_QUERY_ARR[curr_depth]);
         switch (curr_depth) {
             case 0: {
-                if(inserted_value.length() != 6){
-                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                if(inserted_value.length() < 5) {
+                    std::cout << inserted_value << " ignored" << std::endl;
+                    return;
                 }
                 query.bind(1, inserted_value.substr(0,4));
-                query.bind(2,inserted_value.substr(3));
+                query.bind(2,inserted_value.substr(4, 2));
                 break;
             }
             case 1: {
-                if(inserted_value.length() != 11){
-                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                if(inserted_value.length() < 17) {
+                    std::cout << inserted_value << " ignored" << std::endl;
+                    return;
                 }
                 query.bind(1, parent_id);
-                query.bind(2,inserted_value.substr(0,4));
-                query.bind(3,inserted_value.substr(4,3));
-                query.bind(4,inserted_value.substr(7,1));
-                query.bind(5,inserted_value.substr(8,3));
+                query.bind(2,inserted_value.substr(6,4));
+                query.bind(3,inserted_value.substr(10,3));
+                query.bind(4,inserted_value.substr(13,1));
+                query.bind(5,inserted_value.substr(16));
                 break;
             }
+            //nikad se nece pokrenuti
             case 2: {
-                if(inserted_value.length() != 10){
-                    std::cout << "Error: " << inserted_value << " is not properly named" << std::endl; 
+                if(inserted_value.length() < 10) {
+                    std::cout << inserted_value << " ignored" << std::endl;
+                    return;
                 }
                 query.bind(1, parent_id);
                 query.bind(2,inserted_value.substr(0,2));
                 query.bind(3,inserted_value.substr(2,4));
                 query.bind(4,inserted_value.substr(6,3));
                 query.bind(5,inserted_value.substr(9,1));
-                break;
+                break; 
             }
         }
     query.exec();

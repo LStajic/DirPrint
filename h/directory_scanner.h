@@ -4,6 +4,7 @@
 
 #include <filesystem>
 #include "../h/database_handler.h"
+#include "../h/xls_handler.h"
 
 namespace fs = std::filesystem;
 
@@ -14,7 +15,8 @@ class directory_scanner{
 
     private:
     void process_directory(const fs::path& path);
-    database_handler& db_handler;
+    database_handler& m_db_handler;
+    xls_handler m_xls_handler;
 };
 
 
