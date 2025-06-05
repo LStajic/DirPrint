@@ -18,6 +18,7 @@ add_executable(my_app
     src/directory_scanner.cpp
     src/database_handler.cpp
     src/xls_handler.cpp
+    src/database/command_executor.cpp
 )
 
 target_link_libraries(my_app

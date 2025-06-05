@@ -15,8 +15,10 @@ class directory_scanner{
 
     private:
     void process_directory(const fs::path& path);
+    void read_xls_file(const fs::path& path);
     database_handler& m_db_handler;
     xls_handler m_xls_handler;
+    long int current_id[4] = {0,0,0,0};
 };
 
 

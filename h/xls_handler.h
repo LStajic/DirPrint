@@ -3,27 +3,26 @@
 #define XLS_HANDLER_H
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include <xls.h>
 
-struct results{
-    std::vector<std::vector<std::string>> data;
 
-};
 //probaj da deklarises kao static
 class xls_handler{
     public:
-    std::string get_row(int row_number);
-    std::string get_column(int column_number);
+
     void set_workbook(std::string path);
-    void get_data();
+    void get_xls_data();
+    void clear_results(){m_results.clear();};
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::string>>& get_results() const {return m_results;};
+
 
     private:
+    void convert_to_map(std::vector<std::vector<std::string>> data);
     xls::xlsWorkBook* m_workbook;
     xls::xlsWorkSheet* m_worksheet;
-    results m_results;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::string>> m_results;
 };
-//Rezultat je po godini
-
 
 #endif
