@@ -19,6 +19,7 @@ add_executable(my_app
     src/database_handler.cpp
     src/xls_handler.cpp
     src/database/command_executor.cpp
+    src/logger/logger_instance.cpp
 )
 
 target_link_libraries(my_app

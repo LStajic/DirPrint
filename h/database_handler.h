@@ -16,6 +16,8 @@ class database_handler {
     
     void create_directory(std::filesystem::path target_directory);
     void begin_transaction();
+    void drop_tables();
+    void rebuild_tables();
     void commit();
     int get_parent_id(int depth);
 

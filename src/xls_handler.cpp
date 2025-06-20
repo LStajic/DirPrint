@@ -1,5 +1,5 @@
 #include "../h/xls_handler.h"
-#include <iostream>
+#include "logger/logger_instance.h"
 
 void xls_handler::set_workbook(std::string path) {
   m_workbook = xls::xls_open(path.c_str(), "UTF-8");
@@ -22,6 +22,8 @@ void xls_handler::convert_to_map(std::vector<std::vector<std::string>> data) {
       m_results[data[0][j]][data[i][0]] = data[i][j];
     }
   }
+  logger.log(std::string("conversion to map performed\n"), log_level::INFO);
+
 }
 
 // WARNING: This functiion closes the workbook on finish
@@ -32,7 +34,7 @@ void xls_handler::get_xls_data() {
   int col_count = m_worksheet->rows.lastcol + 1;
   std::vector<std::vector<std::string>> matrix(
       row_count, std::vector<std::string>(col_count, "0"));
-  std::cout << "get_xls_data parsing + matrix" << ": check!" << std::endl;
+  logger.log(std::string("data parsing performed\n"), log_level::INFO);
 
   for (xls::DWORD row = 0; row <= m_worksheet->rows.lastrow; ++row) {
     for (xls::DWORD col = 0; col <= m_worksheet->rows.lastcol; ++col) {
@@ -65,6 +67,7 @@ void xls_handler::get_xls_data() {
       }
     }
   }
+  logger.log(std::string("finished grabbing cell data\n"), log_level::INFO);
   convert_to_map(matrix);
   xls::xls_close_WS(m_worksheet);
   xls::xls_close_WB(m_workbook);
